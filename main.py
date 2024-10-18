@@ -31,6 +31,8 @@ skills = ["Стремительный прыжок",
           "Огненный заряд"
           ]
 
+choise_skills = random.sample(skills, 3)
+
 context["first_name"] = fake.first_name()
 context["last_name"] = fake.last_name()
 context["job"] = fake.job()
@@ -40,9 +42,9 @@ context["agility"] = random.randint(3, 18)
 context["endurance"] = random.randint(3, 18)
 context["intelligence"] = random.randint(3, 18)
 context["luck"] = random.randint(3, 18)
-context["skill_1"] = random.choice(skills)
-context["skill_2"] = random.choice(skills)
-context["skill_3"] = random.choice(skills)
+context["skill_1"] = choise_skills[0]
+context["skill_2"] = choise_skills[1]
+context["skill_3"] = choise_skills[3]
 
 
 
