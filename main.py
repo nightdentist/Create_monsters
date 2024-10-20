@@ -1,8 +1,11 @@
 from faker import Faker
 
+import os
 import random
 
 import file_operations
+
+os.mkdir("cards")
 
 abc = {
     'а': 'а͠', 'б': 'б̋', 'в': 'в͒͠',
@@ -55,21 +58,33 @@ skills = ["Стремительный прыжок",
           "Ледяной выстрел",
           "Огненный заряд"
           ]
+for i in range(10):
 
-choise_skills = random.sample(skills, 3)
+  choise_skills = random.sample(skills, 3)
 
-context["first_name"] = fake.first_name()
-context["last_name"] = fake.last_name()
-context["job"] = fake.job()
-context["town"] = fake.city()
-context["strength"] = random.randint(3, 18)
-context["agility"] = random.randint(3, 18)
-context["endurance"] = random.randint(3, 18)
-context["intelligence"] = random.randint(3, 18)
-context["luck"] = random.randint(3, 18)
-context["skill_1"] = choise_skills[0]
-context["skill_2"] = choise_skills[1]
-context["skill_3"] = choise_skills[2]
+  skill_1 = choise_skills[0]
+  skill_2 = choise_skills[1]
+  skill_3 = choise_skills[2]
+
+  for key in abc:
+    skill_1 = skill_1.replace(key, abc[key])
+    skill_2 = skill_2.replace(key, abc[key])
+    skill_3 = skill_3.replace(key, abc[key])
 
 
-file_operations.render_template("charsheet.svg", "result.svg", context)
+  context["first_name"] = fake.first_name()
+  context["last_name"] = fake.last_name()
+  context["job"] = fake.job()
+  context["town"] = fake.city()
+  context["strength"] = random.randint(3, 18)
+  context["agility"] = random.randint(3, 18)
+  context["endurance"] = random.randint(3, 18)
+  context["intelligence"] = random.randint(3, 18)
+  context["luck"] = random.randint(3, 18)
+  context["skill_1"] = skill_1
+  context["skill_2"] = skill_2
+  context["skill_3"] = skill_3
+  i += 1
+  name_card = "cards/form_" + str(i) + ".svg"
+
+  file_operations.render_template("charsheet.svg", name_card, context)
